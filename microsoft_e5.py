@@ -1,11 +1,13 @@
 import json
+import os
 import requests
 import sys
 import logging
 from loguru import logger
 
+BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 LOGGING_LEVEL = logging.INFO
-log_file_path = "./microsoft_e5.log"
+log_file_path = os.path.join(BASE_PATH, "e5.log")
 log_format = "{time: YYYY-mm-dd HH:mm:ss.SSS} {message}"
 LOG_HANDLERS = [
     {
@@ -58,7 +60,7 @@ configure_logger()
 
 
 def load_payload():
-    with open("./payload.json", "r") as f:
+    with open(os.path.join(BASE_PATH, "payload.json"), "r") as f:
         return json.load(f)
 
 
@@ -97,7 +99,7 @@ def authorize(code, redirect_uri, client_id, client_secret, tenant):
     payload = rst.json()
     if "access_token" in payload.keys():
         logger.info("{}".format("注册成功"))
-        with open("./payload.json", "w") as f:
+        with open(os.path.join(BASE_PATH, "payload.json"), "w") as f:
             json.dump(rst.json(), f)
 
 
@@ -118,7 +120,7 @@ def refresh_token():
     payload = rst.json()
     if "access_token" in payload.keys():
         logger.info("{}".format("更新token成功"))
-        with open("./payload.json", "w") as f:
+        with open(os.path.join(BASE_PATH, "payload.json"), "w") as f:
             json.dump(rst.json(), f)
 
 
