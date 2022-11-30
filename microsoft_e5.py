@@ -8,12 +8,12 @@ from loguru import logger
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 LOGGING_LEVEL = logging.INFO
 log_file_path = os.path.join(BASE_PATH, "e5.log")
-log_format = "{time: YYYY-mm-dd HH:mm:ss.SSS} {message}"
+log_format = "{time: YYYY-MM-DD HH:mm:ss.SSS} {message}"
 LOG_HANDLERS = [
     {
         "sink": sys.stderr,
         "level": LOGGING_LEVEL,
-        "format": "<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> <blue>{message}</blue>"
+        "format": "<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> <yellow>{message}</yellow>"
     },
     {
         "sink": log_file_path,
